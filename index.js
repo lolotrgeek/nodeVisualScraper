@@ -21,9 +21,8 @@ capture.takeScreenshot().then(img => process.text(img).then(text => {
 async function main () {
     try {
         const img = await capture.takeScreenshot()
-        const text = await process.text(img)
-        console.log(text)
-        const file = utils.saveFile({data : text})
+        const data = await process.text(img)
+        const file = utils.saveFile(data)
         console.log(file)
     }
     catch(err){Error(err)}

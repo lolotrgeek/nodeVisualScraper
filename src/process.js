@@ -1,5 +1,6 @@
 const Tesseract = require('tesseract.js')
-const { createWorker } = Tesseract;
+const { createWorker, setLogging } = Tesseract;
+setLogging(true)
 
 /**
  * 
@@ -8,26 +9,45 @@ const { createWorker } = Tesseract;
 function processText(img) {
   return new Promise(async (resolve, reject) => {
     try {
-      const worker = createWorker();
-      await worker.load();
-      await worker.loadLanguage('eng');
-      await worker.initialize('eng');
-      const { data: { text } } = await worker.recognize(img);
+      const { data: { text } } = await Tesseract.recognize(img, 'eng', { logger: m => console.log(m) })
       resolve(text)
     } catch (err) { reject(err) }
   })
-
 }
-//   Tesseract.recognize(
-//     img,
-//     'eng',
-//     { logger: m => console.log(m) }
-//   ).then(({ data: { text } }) => {
-//     console.log(text);
+// function processText(worker, img) {
+//   return new Promise(async (resolve, reject) => {
+//     try {
+//       const {data: {text}} = await worker.recognize(img)
+//       resolve(text)
+//     } catch (err) { reject(err) }
 //   })
 // }
 
+function startWorker() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const worker = createWorker()
+      await worker.load()
+      await worker.loadLanguage('eng')
+      await worker.initialize('eng')
+      resolve(worker)
+    }
+    catch (err) { reject(err) }
+  })
+}
+
+function endWorker(worker) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      await worker.terminate()
+      resolve(worker)
+    }
+    catch (err) { reject(err) }
+  })
+}
 
 module.exports = {
-  text: processText
+  text: processText,
+  startWorker: startWorker,
+  endWorker: endWorker
 }

@@ -27,7 +27,7 @@ function structureImage(img) {
  */
 function saveFile(data) {
     if(!data) return null
-    if(!data.filename) data.filename = Data.now().toString()
+    if(!data.filename) data.filename = Date.now().toString()
     const path = './output/'+data.filename
     fs.appendFile(path, data.data, (err) => new Promise((resolve, reject) => data.data ? resolve(data) : reject(err)))
 }
