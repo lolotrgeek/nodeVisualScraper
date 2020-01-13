@@ -1,4 +1,5 @@
 const { createCanvas, Image, loadImage   } = require('canvas')
+const fs = require('fs')
 
 /**
  * 
@@ -18,7 +19,20 @@ function structureImage(img) {
     return canvas.toBuffer()
 }
 
+/**
+ * 
+ * @param {object} data
+ * @param {*} data.filename
+ * @param {*} data.data
+ */
+function saveFile(data) {
+    if(!data) return null
+    if(!data.filename) data.filename = Data.now().toString()
+    const path = './output/'+data.filename
+    fs.appendFile(path, data.data, (err) => new Promise((resolve, reject) => data.data ? resolve(data) : reject(err)))
+}
 
 module.exports = {
-    structureImage: structureImage
+    structureImage: structureImage,
+    saveFile: saveFile
 }

@@ -1,9 +1,13 @@
+# Node Visual Scraper
+
 ## Purpose
 Look at pixels, use inputs, extract meaning.
 
 ## Use Cases
 Data scraping where DOM is inaccessible.
+
 Testing Apps.
+
 Automating Repetitive Tasks.
 
 ## Control Loop
@@ -37,5 +41,7 @@ OPENCV_BIN_DIR = C:\tools\opencv\build\x64\vc15\bin
 
 ## Dependencies
 [OpenCV] https://opencv.org/releases/
+
 [Puppeteer] https://developers.google.com/web/tools/puppeteer/get-started
+
 [Jimp] https://github.com/oliver-moran/jimp

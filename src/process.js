@@ -7,13 +7,14 @@ const { createWorker } = Tesseract;
  */
 function processText(img) {
   return new Promise(async (resolve, reject) => {
-    const worker = createWorker();
-    await worker.load();
-    await worker.loadLanguage('eng');
-    await worker.initialize('eng');
-    const { data: { text } } = await worker.recognize(img);
-    console.log(text);
-    resolve(text)
+    try {
+      const worker = createWorker();
+      await worker.load();
+      await worker.loadLanguage('eng');
+      await worker.initialize('eng');
+      const { data: { text } } = await worker.recognize(img);
+      resolve(text)
+    } catch (err) { reject(err) }
   })
 
 }

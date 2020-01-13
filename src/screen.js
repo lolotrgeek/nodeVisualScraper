@@ -17,21 +17,27 @@ function screenPixels() {
  * @todo bitmap saves incorrect colors
  * @todo doesn't capture mouse pixels
  * @todo consider making async/promise based
+ * @returns {Promise}
  */
 function takeScreenshot(filename) {
-    if (!filename) filename = Date.now().toString() + '.png'
-    if (typeof filename !== 'string') return Error('filname must be a string')
-    const path = './output/'+ filename
-    const img = screenPixels()
-    new Jimp({ data: img.image, width: img.width, height: img.height }, (err, image) => {
-        if (err) return err
-        image.getBuffer(Jimp.MIME_PNG, buffer =>{console.log(buffer); return buffer} )
-        image.write(path)
+    return new Promise((resolve, reject) => {
+        if (!filename) filename = Date.now().toString() + '.png'
+        if (typeof filename !== 'string') reject('filname must be a string')
+        const path = './output/' + filename
+        const img = screenPixels()
+        new Jimp({ data: img.image, width: img.width, height: img.height }, async (err, image) => {
+            if (err) reject(err)
+            try {
+                const buffer = await image.getBufferAsync("image/png")
+                // image.write(path)
+                resolve(buffer)
+            }
+            catch (err) { reject(err) }
+
+        })
     })
 
 }
-
-
 
 /**
  * 
