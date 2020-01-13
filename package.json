@@ -1,0 +1,23 @@
+{
+  "name": "nodevisualscraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js --experimental-modules",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "canvas": "^2.6.1",
+    "html-to-image": "^0.1.1",
+    "jimp": "^0.9.3",
+    "opencv4nodejs": "^5.5.0",
+    "puppeteer": "^2.0.0",
+    "robotjs": "^0.6.0",
+    "screenshot-desktop": "^1.10.0",
+    "tesseract.js": "^2.0.0-beta.2"
+  }
+}
