@@ -45,3 +45,5 @@ OPENCV_BIN_DIR = C:\tools\opencv\build\x64\vc15\bin
 [Puppeteer] https://developers.google.com/web/tools/puppeteer/get-started
 
 [Jimp] https://github.com/oliver-moran/jimp
+
+[Tesseract] https://github.com/naptha/tesseract.js
